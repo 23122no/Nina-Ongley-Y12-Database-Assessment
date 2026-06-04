@@ -20,10 +20,23 @@
   BODY
 **************************************************************-->
 <body>
+  <script src="game.js"></script>
   <div class="container">
       <div>
-        <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button>
-        <button onclick="location.href='geoDash.html'">Play Geo Dash</button>
+        <h1>Welcome to Space Invaders</h1>
+        <p id="home">
+          Move left and right with arrow keys. 
+          Use space to shoot incoming enemies before 
+          they reach the botttom of the screen or hit you. 
+          Light green enemies make you move faster and dark 
+          green increases the speed of your bullets. White 
+          enemies are worth double points!
+          Try to shoot as many enemies as possible!
+        </p>
+      </div>
+
+      <div>
+        <button onclick="location.href='spaceInvadersGame.html'">Start</button>
       </div>
   </div>
 </body>

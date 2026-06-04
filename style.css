@@ -1,0 +1,46 @@
+body {
+  background-color: #dcf4ff;
+  font-family: "Jua", sans-serif;
+  color: #162d6d;
+  overflow: hidden;
+}
+
+button {
+  padding: 2vmin;
+  font-size: 4vmin;
+  cursor: pointer;
+  background-color: #a3e2ff;
+  text-align: center;
+  border-style: solid;
+  border-color: #162d6d;
+  border-width: 6px;
+  border-radius: 10px;
+  font-family: "Jua", sans-serif;
+  color: #162d6d;
+}
+
+h1 {
+  font-size: 10vmin;
+}
+
+p {
+  font-size: 6vmin;
+}
+
+.container {
+  margin-left: 10vmin;
+  margin-right: 10vmin;
+}
+
+.container > div {
+  width: auto;
+  text-align: center;
+}
+
+#lose {
+  font-size: 8vmin;
+}
+
+#home {
+  font-size: 4vmin;
+}
