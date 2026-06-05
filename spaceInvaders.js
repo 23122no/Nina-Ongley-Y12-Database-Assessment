@@ -1,5 +1,5 @@
 /*******************************************************/
-// P5.play: game.js
+// P5.play: spaceInvaders.js
 // Run a space invaders style game
 // Written by Nina
 /*******************************************************/
