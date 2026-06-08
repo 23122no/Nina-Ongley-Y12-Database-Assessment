@@ -5,7 +5,7 @@ body {
   overflow: hidden;
 }
 
-button {
+button, a {
   padding: 2vmin;
   font-size: 4vmin;
   cursor: pointer;
@@ -17,6 +17,7 @@ button {
   border-radius: 10px;
   font-family: "Jua", sans-serif;
   color: #162d6d;
+  text-decoration: none;
 }
 
 h1 {
