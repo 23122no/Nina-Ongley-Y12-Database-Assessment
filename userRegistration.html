@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Games</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- stylesheets *******************************************-->
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-   <!-- icon *************************************************-->
+  <!-- icon *************************************************-->
   <link rel="icon" href="title/player_image.png">
 
   <!-- JQUERY ************************************************-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-      <!-- firebase start ****************************************-->
+  <!-- firebase start ****************************************-->
   <!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
   <!-- Add Firebase products that you want to use -->
@@ -31,16 +32,31 @@
 <!--*************************************************************
   BODY
 **************************************************************-->
+
 <body>
   <div class="container">
-    <h1>Welcome! Please log in:</h1>
-      <div>
-        <button id="loginButton" onclick="fb_authenticate()">Login with Google</button>
-        <button  onclick="location.href='gameSelection.html'">View games</button>
-      </div>
-    <script src="fb_script.js"></script>
+    <h1>Welcome! Please register here:</h1>
+    <div>
+      <form id="registrationForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" autocomplete="name" required />
+
+        <br><br>
+
+        <label for="age">Your Age:</label>
+        <input type="number" id="age" name="age" required />
+
+        <!-- add more fields here -->
+      </form>
+
+      <br>
+
+      <button type="submit" onclick="fb_saveUserData()">Submit</button>
+    </div>
   </div>
+  <script src="fb_script.js"></script>
 </body>
+
 </html>
 <!--*************************************************************
   END OF INDEX.HTML
