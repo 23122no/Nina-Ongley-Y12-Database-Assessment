@@ -25,6 +25,7 @@
   <!-- firebase end ******************************************-->
   <script src="fb_setup.js"></script>
   <script src="fb_io.js"></script>
+  <script src="fb_script.js"></script>
 
 </head>
 
@@ -33,10 +34,12 @@
 **************************************************************-->
 <body>
   <div class="container">
-    <h1>Welcome! Here are some games you can play:</h1>
+    <h1 id="welcome">Welcome! Here are some games you can play:</h1>
       <div>
         <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button>
         <button onclick="location.href='geoDash.html'">Play Geo Dash</button>
+        <button onclick="fb_readHighScores()">Show High Scores</button>
+        <div id="leaderboard"></div>
       </div>
   </div>
 </body>

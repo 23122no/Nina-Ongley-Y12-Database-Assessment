@@ -6,8 +6,7 @@
 //
 // Written by Mr Britton
 /*******************************************************/
-console.log("Running the game");
-
+console.log("Running the game"); 
 
 // End game code
 function endGame(_player, _obstacle){
@@ -16,6 +15,8 @@ function endGame(_player, _obstacle){
     player.remove();
     obstacles.removeAll();
     // Put your database writes here:
+
+    firebase.database().ref("database/geoDash/" + uid + "/score").set(score);
 
 
 
