@@ -77,6 +77,12 @@ function fb_readGeoDashScores() {
     firebase.database().ref("database/geoDash").once("value", fb_displayHighScores, fb_error)
 }
 
+function fb_readSpaceInvadersScores() {
+    console.log("reading high scores")
+    
+    firebase.database().ref("database/spaceInvaders").once("value", fb_displayHighScores, fb_error)
+}
+
 function fb_displayHighScores(scores) {
     console.log(scores.val())
     geoDash_leaderboard.innerHTML = ""

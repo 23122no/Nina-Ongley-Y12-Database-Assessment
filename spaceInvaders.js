@@ -245,6 +245,7 @@ function loseGame() {
         " and earned " + score + " points.";
 
     firebase.database().ref("database/spaceInvaders/" + uid + "/score").set(score);
+    firebase.database().ref("database/spaceInvaders/" + uid + "/name").set(userName);
 }
 
 
