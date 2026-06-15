@@ -24,7 +24,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
   <!-- firebase end ******************************************-->
   <script src="fb_setup.js"></script>
-  <script src="fb_io.js"></script>
+
   <script src="fb_script.js"></script>
 
 </head>
@@ -38,10 +38,11 @@
       <div>
         <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button>
         <button onclick="location.href='geoDash.html'">Play Geo Dash</button>
-        <button onclick="fb_readHighScores()">Show High Scores</button>
-        <div id="leaderboard"></div>
+        <button onclick="fb_readGeoDashScores()">Show Geo Dash Scores</button>
+        <div id="geoDash_leaderboard"></div>
       </div>
   </div>
+    <script src="fb_io.js"></script>
 </body>
 </html>
 <!--*************************************************************

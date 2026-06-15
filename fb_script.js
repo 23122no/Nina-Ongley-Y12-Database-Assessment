@@ -13,6 +13,7 @@ const FORM_HTML = `
 
     <button type="submit" onclick="fb_saveUserData()">Submit</button>`
 
+
 function fb_checkUserID() {
     console.log("checking user id")
     firebase.database().ref("database/users/" + uid).once("value", fb_checkUserPresence, fb_error)
@@ -28,10 +29,28 @@ function fb_checkUserPresence(currentUser) {
     }
 }
 
+var userName;
+var userAge;
+
+function fb_getUserData() {
+    firebase.database().ref("database/users/" + uid).once("value", fb_readUserData, fb_error)
+}
+
+function fb_readUserData(snapshot) {
+    var user = snapshot.val()
+    console.log(user)
+    userName = user["name"]
+    userAge = user["age"]
+    console.log(userAge)
+    console.log(userName)
+    welcome.innerHTML = "<h1> Welcome, " + userName + "! Here are some games:</h1>"
+}
+
+
 function fb_saveUserData() {
 
-    const userAge = document.getElementById("age").value;
-    const userName = document.getElementById("name").value;
+    userAge = document.getElementById("age").value;
+    userName = document.getElementById("name").value;
 
     if (GLOBAL_user && userAge >= 16) {
 
@@ -52,18 +71,20 @@ function fb_saveUserData() {
     }
 }
 
-function fb_readHighScores() {
+function fb_readGeoDashScores() {
     console.log("reading high scores")
+    
     firebase.database().ref("database/geoDash").once("value", fb_displayHighScores, fb_error)
 }
 
 function fb_displayHighScores(scores) {
     console.log(scores.val())
-    leaderboard.innerHTML = ""
+    geoDash_leaderboard.innerHTML = ""
     scores.forEach(fb_displayOneScore);
 }
 
 function fb_displayOneScore(currentScore) {
     var scoreDisplaying = currentScore.val()
     console.log(scoreDisplaying)
+    geoDash_leaderboard.innerHTML += "<p>" + scoreDisplaying["name"] + " got " + scoreDisplaying["score"] + " points. </p>";
 }

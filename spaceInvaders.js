@@ -243,6 +243,8 @@ function loseGame() {
     ended.style.display = "block";
     lose.textContent = "You reached round " + enemyRound +
         " and earned " + score + " points.";
+
+    firebase.database().ref("database/spaceInvaders/" + uid + "/score").set(score);
 }
 
 
