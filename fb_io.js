@@ -10,10 +10,6 @@
 var GLOBAL_user;  // Google's user object
 var uid;
 
-fb_authenticate();
-function poop(){
-  console.log("poop")
-}
 function fb_authenticate(){
     // authenticate with Google
     console.log("fb_authenticate running")

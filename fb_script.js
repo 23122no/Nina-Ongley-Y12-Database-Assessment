@@ -22,7 +22,7 @@ function fb_checkUserID() {
 function fb_checkUserPresence(currentUser) {
     if (currentUser.val() == null) {
         console.log("user is new to site")
-        indexOptions.innerHTML = FORM_HTML;
+        window.location.href = "userRegistration.html"
     } else {
         console.log("user has visited site before")
         window.location.href = "gameSelection.html"
