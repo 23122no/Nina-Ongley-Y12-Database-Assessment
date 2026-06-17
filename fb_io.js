@@ -24,6 +24,7 @@ function fb_handleLogin(_user) {
     console.log("User is logged in")
     console.log(GLOBAL_user);
     fb_getUserData();
+    fb_checkUserID
   } else  {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();

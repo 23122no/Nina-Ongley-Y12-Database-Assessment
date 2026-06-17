@@ -20,7 +20,7 @@ function fb_checkUserID() {
 }
 
 function fb_checkUserPresence(currentUser) {
-    if (currentUser.val() == null) {
+    if (currentUser.val() == null && window.location.pathname.endsWith("index.html")) {
         console.log("user is new to site")
         window.location.href = "userRegistration.html"
     } else {
@@ -38,16 +38,15 @@ function fb_getUserData() {
 
 function fb_readUserData(snapshot) {
     var user = snapshot.val()
-    console.log(user)
     userName = user["name"]
     userAge = user["age"]
-    console.log(userAge)
-    console.log(userName)
+}
+
+function fb_displayUserWelcome() {
     welcome.innerHTML = "<h1> Welcome, " + userName + "! Here are some games:</h1>"
 }
 
-
-function fb_saveUserData() {
+async function fb_saveUserData() {
 
     userAge = document.getElementById("age").value;
     userName = document.getElementById("name").value;
@@ -56,11 +55,11 @@ function fb_saveUserData() {
 
         console.log("saving user data")
 
-        firebase.database().ref("database/users/" + uid + "/email").set(GLOBAL_user.email);
-        firebase.database().ref("database/users/" + uid + "/photo").set(GLOBAL_user.photoURL);
+        await firebase.database().ref("database/users/" + uid + "/email").set(GLOBAL_user.email);
+        await firebase.database().ref("database/users/" + uid + "/photo").set(GLOBAL_user.photoURL);
 
-        firebase.database().ref("database/users/" + uid + "/name").set(userName);
-        firebase.database().ref("database/users/" + uid + "/age").set(Number(userAge));
+        await firebase.database().ref("database/users/" + uid + "/name").set(userName);
+        await firebase.database().ref("database/users/" + uid + "/age").set(Number(userAge));
 
         window.location.href = "gameSelection.html"
 
@@ -71,26 +70,31 @@ function fb_saveUserData() {
     }
 }
 
+var geoDashScoresRead = false;
+var spaceInvadersScoresRead = false;
+
+fb_readGeoDashScores();
+fb_readSpaceInvadersScores();
+
 function fb_readGeoDashScores() {
     console.log("reading high scores")
-    
-    firebase.database().ref("database/geoDash").once("value", fb_displayHighScores, fb_error)
+    leaderboard.innerHTML = "<h2> GeoDash High Scores </h2>"
+    firebase.database().ref("database/geoDash").orderByChild("score").once("value", fb_displayHighScores, fb_error)
 }
 
 function fb_readSpaceInvadersScores() {
     console.log("reading high scores")
-    
+    leaderboard.innerHTML += "<h2> Space Invaders High Scores </h2>" 
     firebase.database().ref("database/spaceInvaders").once("value", fb_displayHighScores, fb_error)
 }
 
-function fb_displayHighScores(scores) {
-    console.log(scores.val())
-    geoDash_leaderboard.innerHTML = ""
-    scores.forEach(fb_displayOneScore);
-}
-
-function fb_displayOneScore(currentScore) {
-    var scoreDisplaying = currentScore.val()
-    console.log(scoreDisplaying)
-    geoDash_leaderboard.innerHTML += "<p>" + scoreDisplaying["name"] + " got " + scoreDisplaying["score"] + " points. </p>";
+async function fb_displayHighScores(scores) {
+    var score = scores.val()
+    var uidList = Object.keys(score)
+    for (i = 0; i < uidList.length; i++){
+        var currentUID = uidList[i];
+        var userData = await firebase.database().ref("database/users/" + currentUID).once("value")
+        var currentUserData = userData.val()
+        leaderboard.innerHTML += "<p>" + currentUserData["name"] + " got " + score[currentUID].score + " points. </p>";
+    }
 }
