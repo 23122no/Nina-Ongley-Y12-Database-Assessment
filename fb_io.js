@@ -27,7 +27,7 @@ function fb_handleLogin(_user) {
     if (window.location.pathname.endsWith("/")){
       fb_checkUserID();
     }
-    if (window.location.pathname.endsWith("userRegistration")) {
+    if (window.location.pathname.endsWith("userRegistration.html")) {
       fb_getUserData();
     }
 
