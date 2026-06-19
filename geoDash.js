@@ -16,8 +16,7 @@ function endGame(_player, _obstacle){
     obstacles.removeAll();
     // Put your database writes here:
 
-    firebase.database().ref("database/geoDash/" + uid + "/score").set(score);
-    firebase.database().ref("database/geoDash/" + uid + "/name").set(userName);
+    fb_readPastGeoDashScore();
 
 
 

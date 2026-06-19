@@ -10,6 +10,7 @@
 var GLOBAL_user;  // Google's user object
 var uid;
 
+
 function fb_authenticate(){
     // authenticate with Google
     console.log("fb_authenticate running")
@@ -23,8 +24,7 @@ function fb_handleLogin(_user) {
     uid = _user.uid;
     console.log("User is logged in")
     console.log(GLOBAL_user);
-    fb_getUserData();
-    fb_checkUserID
+    fb_checkUserID();
   } else  {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();
