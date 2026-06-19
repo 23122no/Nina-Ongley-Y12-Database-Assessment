@@ -24,7 +24,7 @@ function fb_handleLogin(_user) {
     uid = _user.uid;
     console.log("User is logged in")
     console.log(GLOBAL_user);
-    if (window.location.pathname.endsWith("index.html")){
+    if (window.location.pathname.endsWith("/")){
       fb_checkUserID();
     }
     if (window.location.pathname.endsWith("userRegistration")) {

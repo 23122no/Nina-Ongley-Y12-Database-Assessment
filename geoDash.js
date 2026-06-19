@@ -17,9 +17,6 @@ function endGame(_player, _obstacle){
     // Put your database writes here:
 
     fb_readPastGeoDashScore();
-
-
-
 }
 
 
