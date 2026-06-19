@@ -24,7 +24,13 @@ function fb_handleLogin(_user) {
     uid = _user.uid;
     console.log("User is logged in")
     console.log(GLOBAL_user);
-    fb_checkUserID();
+    if (window.location.pathname.endsWith("index.html")){
+      fb_checkUserID();
+    }
+    if (window.location.pathname.endsWith("userRegistration")) {
+      fb_getUserData();
+    }
+
   } else  {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();
