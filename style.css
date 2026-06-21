@@ -25,6 +25,7 @@ h1 {
 
 p {
   font-size: 6vmin;
+  display: inline;
 }
 
 .container {

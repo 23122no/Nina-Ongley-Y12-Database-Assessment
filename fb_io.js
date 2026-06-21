@@ -27,9 +27,7 @@ function fb_handleLogin(_user) {
     if (window.location.pathname.endsWith("/")){
       fb_checkUserID();
     }
-    if (window.location.pathname.endsWith("userRegistration.html")) {
-      fb_getUserData();
-    }
+    fb_getUserData();
 
   } else  {
     console.log("User is NOT logged in - Starting the popup process")
