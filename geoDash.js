@@ -16,7 +16,7 @@ function endGame(_player, _obstacle){
     obstacles.removeAll();
     // Put your database writes here:
 
-    fb_readPastGeoDashScore();
+    fb_compareScores("geoDash");
 }
 
 

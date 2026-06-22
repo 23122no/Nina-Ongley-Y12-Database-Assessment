@@ -244,7 +244,7 @@ function loseGame() {
     lose.textContent = "You reached round " + enemyRound +
         " and earned " + score + " points.";
 
-    fb_readPastSpaceInvadersScore();
+    fb_compareScores("spaceInvaders")
 }
 
 

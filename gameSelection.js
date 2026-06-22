@@ -1,21 +1,20 @@
 var userName;
 var userAge;
 
-var geoDashScoresRead = false;
 var spaceInvadersScoresRead = false;
 
-function fb_readGeoDashScores() {
-    console.log("reading geo dash high scores")
-    spaceInvadersScoresRead = false;
-    leaderboard.innerHTML = "<h2> GeoDash High Scores </h2>"
-    firebase.database().ref("database/geoDash").orderByChild("score").once("value", fb_displayHighScores, fb_error)
-}
-
-function fb_readSpaceInvadersScores() {
-    console.log("reading space invaders high scores")
-    spaceInvadersScoresRead = true;
-    leaderboard.innerHTML += "<h2> Space Invaders High Scores </h2>" 
-    firebase.database().ref("database/spaceInvaders").orderByChild("score").once("value", fb_displayHighScores, fb_error)
+function fb_readScores(game) {
+    if (game == "spaceInvaders") {
+        spaceInvadersScoresRead = true;
+    } else if (game == "geoDash") {
+        spaceInvadersScoresRead = false;
+        leaderboard.innerHTML = ""
+    } else {
+        leaderboard.innerHTML = ""
+    }
+    console.log("reading " + game + "high scores")
+    leaderboard.innerHTML += "<h2>" + game + " High Scores </h2>"
+    firebase.database().ref("database/" + game).orderByChild("score").once("value", fb_displayHighScores, fb_error)
 }
 
 async function fb_displayHighScores(scores) {
@@ -26,11 +25,11 @@ async function fb_displayHighScores(scores) {
         var currentUID = uidList[i];
         var userData = await firebase.database().ref("database/users/" + currentUID).once("value")
         var currentUserData = userData.val()
-        leaderboard.innerHTML += "<img src='" + currentUserData["photo"] + "' width='50px' height='50px' >"
+        leaderboard.innerHTML += "<img src='" + currentUserData["photo"] + "' width='30px' height='30px' >"
         leaderboard.innerHTML += "<p>          " + currentUserData["name"] + " got " + score[currentUID].score + " points. </p><br><br>";
     }
     if (spaceInvadersScoresRead == false){
-        fb_readSpaceInvadersScores();
+        fb_readScores("spaceInvaders");
     }
 }
 

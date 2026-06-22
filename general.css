@@ -1,0 +1,37 @@
+body {
+  background-color: #ffdee6ff;
+  font-family: "Jua", sans-serif;
+  color: #8e2953;
+  margin: 30px;
+}
+
+button {
+  padding: 2vmin;
+  font-size: 4vmin;
+  cursor: pointer;
+  background-color: #e697b8ff;
+  text-align: center;
+  border-style: solid;
+  border-color: #8e2953;
+  border-width: 1px;
+  font-family: "Jua", sans-serif;
+  color: #ffdee6ff;
+  text-decoration: none;
+  margin: 20px;
+}
+
+button:hover {
+  background-color: #8e2953;
+}
+
+p {
+    display: inline;
+}
+
+.container {
+    display: flex;
+}
+
+.container > div {
+    margin: 30px;
+}

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- stylesheets *******************************************-->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="general.css">
   <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
    <!-- icon *************************************************-->
@@ -34,12 +34,14 @@
   BODY
 **************************************************************-->
 <body>
+  <div id="welcome"></div>
   <div class="container">
-    <h1 id="welcome">Welcome! Here are some games you can play:</h1>
       <div>
-        <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button>
-        <button onclick="location.href='geoDash.html'">Play Geo Dash</button>
-        <button onclick="fb_readGeoDashScores()">View High Scores</button>
+        <button onclick="location.href='geoDash.html'">Play Geo Dash</button><br>
+        <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button><br>
+        <button onclick="fb_readScores('geoDash')">View High Scores</button>
+      </div>
+      <div>
         <div id="leaderboard"></div>
       </div>
   </div>
