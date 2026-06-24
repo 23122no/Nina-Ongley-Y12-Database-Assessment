@@ -3,7 +3,13 @@ var userAge;
 
 var spaceInvadersScoresRead = false;
 
+var currentGame;
+
+var currentLeaderboard;
+
 function fb_readScores(game) {
+    currentGame = game;
+    currentLeaderboard = document.getElementById(currentGame)
     console.log("fb_readScores , game = " + game)
     if (game == "spaceInvaders") {
         spaceInvadersScoresRead = true;
@@ -11,17 +17,21 @@ function fb_readScores(game) {
         if (game == "geoDash") {
             spaceInvadersScoresRead = false;
         }
-        leaderboard.innerHTML = ""
+        geoDash.innerHTML = ""
+        spaceInvaders.innerHTML = ""
     }
     console.log("reading " + game + "high scores")
-    leaderboard.innerHTML += "<h2>" + game + " High Scores </h2>"
-    firebase.database().ref("database/" + game).orderByChild("score").once("value", fb_displayHighScores, fb_error)
+    currentLeaderboard.innerHTML += "<h2>" + game + " High Scores </h2>"
+    firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value", fb_displayHighScores, fb_error)
 }
 
 async function fb_displayHighScores(scores) {
     console.log("fb_displayHighScores")
     console.log(scores.val())
-    scores.forEach(fb_displayOneScore)
+    await scores.forEach(fb_displayOneScore)
+    if (spaceInvadersScoresRead == false){
+    fb_readScores("spaceInvaders")
+    }
 }
 
 let currentScore;
@@ -30,20 +40,15 @@ function fb_displayOneScore(scoreData) {
     console.log("running fb_displayOneScore")
     currentScore = scoreData.val()
     var currentUID = scoreData.key
+    console.log(currentGame)
     //var userData = await firebase.database().ref("database/users/" + currentUID).once("value")
-    firebase.database().ref("database/users/" + currentUID).once("value", fb_readUserScoreData, fb_error)
     //var currentUserData = userData.val()
     //console.log(currentUserData)
-    //leaderboard.innerHTML += "<img src='" + currentUserData["photo"] + "' width='30px' height='30px' >"
-    leaderboard.innerHTML += "<p>          " + currentUID + " got " + currentScore["score"] + " points. </p><br><br>";
+    currentLeaderboard.innerHTML += "<img src='" + currentScore["photo"] + "' width='30px' height='30px' >"
+    currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"]  * -1 + " points. </p><br><br>";
 }
 
-function fb_readUserScoreData(child) {
-    console.log(currentScore["score"])
-    console.log(child.val())
-}
-
-/****** 
+/**
 async function fb_displayHighScores(scores) {
     console.log(scores.val())
     var score = scores.val()
@@ -51,15 +56,22 @@ async function fb_displayHighScores(scores) {
     for (i = 0; i < uidList.length; i++){
         var currentUID = uidList[i];
         var userData = await firebase.database().ref("database/users/" + currentUID).once("value")
+        var oldScoreData = await firebase.database().ref("database/" + currentGame + "/" + currentUID + "/score").once("value")
+        var oldScore = oldScoreData.val()
+        console.log(oldScore)
+        await firebase.database().ref("database/" + currentGame + "/" + currentUID + "/score").set(oldScore * -1)
         var currentUserData = userData.val()
-        leaderboard.innerHTML += "<img src='" + currentUserData["photo"] + "' width='30px' height='30px' >"
-        leaderboard.innerHTML += "<p>          " + currentUserData["name"] + " got " + score[currentUID].score + " points. </p><br><br>";
+        //leaderboard.innerHTML += "<img src='" + currentUserData["photo"] + "' width='30px' height='30px' >"
+        //leaderboard.innerHTML += "<p>          " + currentUserData["name"] + " got " + score[currentUID].score + " points. </p><br><br>";
     }
     if (spaceInvadersScoresRead == false){
         fb_readScores("spaceInvaders");
     }
 }
-*******/
+
+***/
+
+
 
 async function fb_getUserData() {
     console.log(uid)
