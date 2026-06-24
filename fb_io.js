@@ -49,6 +49,6 @@ function fb_popupLogin() {
 
 function fb_error() {
   // Don't forget your error handling!
-  alert("there was an error reading the message");
+  alert("An error has occured!");
   console.error(error);
 }
