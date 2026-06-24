@@ -13,11 +13,11 @@ function fb_readScores(game) {
     console.log("fb_readScores , game = " + game)
     if (game == "spaceInvaders") {
         spaceInvadersScoresRead = true;
-        currentLeaderboard.innerHTML += "<h2>Space Invaders High Scores</h2>"
+        currentLeaderboard.innerHTML = "<h2>Space Invaders High Scores</h2>"
     } else {
         if (game == "geoDash") {
             spaceInvadersScoresRead = false;
-            currentLeaderboard.innerHTML += "<h2>Geo Dash High Scores</h2>"
+            currentLeaderboard.innerHTML = "<h2>Geo Dash High Scores</h2>"
             spaceInvaders.innerHTML = ""
         }
     }
