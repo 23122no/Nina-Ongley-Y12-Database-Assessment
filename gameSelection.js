@@ -13,15 +13,15 @@ function fb_readScores(game) {
     console.log("fb_readScores , game = " + game)
     if (game == "spaceInvaders") {
         spaceInvadersScoresRead = true;
+        currentLeaderboard.innerHTML += "<h2>Space Invaders High Scores</h2>"
     } else {
         if (game == "geoDash") {
             spaceInvadersScoresRead = false;
+            currentLeaderboard.innerHTML += "<h2>Geo Dash High Scores</h2>"
+            spaceInvaders.innerHTML = ""
         }
-        geoDash.innerHTML = ""
-        spaceInvaders.innerHTML = ""
     }
     console.log("reading " + game + "high scores")
-    currentLeaderboard.innerHTML += "<h2>" + game + " High Scores </h2>"
     firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value", fb_displayHighScores, fb_error)
 }
 
@@ -29,8 +29,8 @@ async function fb_displayHighScores(scores) {
     console.log("fb_displayHighScores")
     console.log(scores.val())
     await scores.forEach(fb_displayOneScore)
-    if (spaceInvadersScoresRead == false){
-    fb_readScores("spaceInvaders")
+    if (spaceInvadersScoresRead == false) {
+        fb_readScores("spaceInvaders")
     }
 }
 
@@ -45,7 +45,7 @@ function fb_displayOneScore(scoreData) {
     //var currentUserData = userData.val()
     //console.log(currentUserData)
     currentLeaderboard.innerHTML += "<img src='" + currentScore["photo"] + "' width='30px' height='30px' >"
-    currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"]  * -1 + " points. </p><br><br>";
+    currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"] * -1 + " points. </p><br><br>";
 }
 
 /**

@@ -11,10 +11,10 @@ var GLOBAL_user;  // Google's user object
 var uid;
 
 
-function fb_authenticate(){
-    // authenticate with Google
-    console.log("fb_authenticate running")
-    authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
+function fb_authenticate() {
+  // authenticate with Google
+  console.log("fb_authenticate running")
+  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
 }
 
 // Run when the login state of the user changes.
@@ -24,12 +24,14 @@ function fb_handleLogin(_user) {
     uid = _user.uid;
     console.log("User is logged in")
     console.log(GLOBAL_user);
-    if (window.location.pathname.endsWith("/")){
+    if (window.location.pathname.endsWith("/")) {
       fb_checkUserID();
     }
-    fb_getUserData();
+    if (window.location.pathname.endsWith("/gameSelection.html")) {
+      fb_getUserData();
+    }
 
-  } else  {
+  } else {
     console.log("User is NOT logged in - Starting the popup process")
     fb_popupLogin();
   }
@@ -45,8 +47,8 @@ function fb_popupLogin() {
 }
 
 
-function fb_error(){
-    // Don't forget your error handling!
-      alert("there was an error reading the message");
-     console.error(error);
+function fb_error() {
+  // Don't forget your error handling!
+  alert("there was an error reading the message");
+  console.error(error);
 }
