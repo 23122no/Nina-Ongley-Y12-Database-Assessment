@@ -29,9 +29,14 @@ p {
 }
 
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
+    place-items: center;
 }
 
 .container > div {
-    margin: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: none;
+    margin-bottom: none;
 }

@@ -41,9 +41,6 @@ function fb_displayOneScore(scoreData) {
     currentScore = scoreData.val()
     var currentUID = scoreData.key
     console.log(currentGame)
-    //var userData = await firebase.database().ref("database/users/" + currentUID).once("value")
-    //var currentUserData = userData.val()
-    //console.log(currentUserData)
     currentLeaderboard.innerHTML += "<img src='" + currentScore["photo"] + "' width='30px' height='30px' >"
     currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"] * -1 + " points. </p><br><br>";
 }
