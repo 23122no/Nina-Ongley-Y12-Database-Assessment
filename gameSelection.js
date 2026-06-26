@@ -24,7 +24,7 @@ async function fb_readScores(game) {
     }
     const scoresSnapshot = await firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value")
     usersSnapshot = await firebase.database().ref("database/users").once("value")
-    scoresSnapshot.forEach(displayOneScore)
+    scoresSnapshot.forEach(fb_displayOneScore)
     console.log("reading " + game + "high scores")
 }
 
