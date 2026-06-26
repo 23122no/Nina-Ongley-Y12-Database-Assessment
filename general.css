@@ -25,13 +25,21 @@ button:hover {
 }
 
 p {
-    display: inline;
+  display: inline;
+  font-size: large;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 40px;
 }
 
 .container {
     display: grid;
     grid-template-columns: auto auto;
-    place-items: center;
 }
 
 .container > div {
@@ -39,4 +47,13 @@ p {
     margin-right: 30px;
     margin-top: none;
     margin-bottom: none;
+}
+
+form {
+  display: block;
+}
+
+label, input {
+  font-size: 4vmin;
+  display: block;
 }

@@ -7,11 +7,12 @@ async function fb_saveUserData() {
 
         console.log("saving user data")
 
-        await firebase.database().ref("database/users/" + uid + "/email").set(GLOBAL_user.email);
-        await firebase.database().ref("database/users/" + uid + "/photo").set(GLOBAL_user.photoURL);
-
-        await firebase.database().ref("database/users/" + uid + "/name").set(userName);
-        await firebase.database().ref("database/users/" + uid + "/age").set(Number(userAge));
+        await firebase.database().ref("database/users/" + uid).set({
+            "name": userName,
+            "age": Number(userAge),
+            "photo": GLOBAL_user.photoURL,
+            "email": GLOBAL_user.email
+        });
 
         window.location.href = "gameSelection.html"
 
