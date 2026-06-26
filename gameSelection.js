@@ -7,6 +7,43 @@ var currentGame;
 
 var currentLeaderboard;
 
+var usersSnapshot;
+async function fb_readScores(game) {
+    currentGame = game;
+    currentLeaderboard = document.getElementById(currentGame)
+    console.log("fb_readScores , game = " + game)
+    if (game == "spaceInvaders") {
+        spaceInvadersScoresRead = true;
+        currentLeaderboard.innerHTML = "<h2>Space Invaders High Scores</h2>"
+    } else {
+        if (game == "geoDash") {
+            spaceInvadersScoresRead = false;
+            currentLeaderboard.innerHTML = "<h2>Geo Dash High Scores</h2>"
+            spaceInvaders.innerHTML = ""
+        }
+    }
+    const scoresSnapshot = await firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value")
+    usersSnapshot = await firebase.database().ref("database/users").once("value")
+    scoresSnapshot.forEach(displayOneScore)
+    console.log("reading " + game + "high scores")
+}
+
+function fb_displayOneScore(scoreData) {
+    console.log("running fb_displayOneScore")
+    var uid = scoreData.key;
+    var userName = usersSnapshot.child(uid).val().name
+    var profilePhoto = usersSnapshot.child(uid).val().photo
+    console.log(uid + userName + profilePhoto)
+    currentLeaderboard.innerHTML += "<p>          " + userName + " got " + scoreData.val().score * -1 + " points. </p><br><br>"; 
+    //currentScore = scoreData.val()
+    //var currentUID = scoreData.key
+    //console.log(currentGame)
+    //currentLeaderboard.innerHTML += "<img src='" + currentScore["photo"] + "' width='30px' height='30px' >"
+    //currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"] * -1 + " points. </p><br><br>";
+}
+
+
+/*****
 function fb_readScores(game) {
     currentGame = game;
     currentLeaderboard = document.getElementById(currentGame)
@@ -44,6 +81,8 @@ function fb_displayOneScore(scoreData) {
     currentLeaderboard.innerHTML += "<img src='" + currentScore["photo"] + "' width='30px' height='30px' >"
     currentLeaderboard.innerHTML += "<p>          " + currentScore["name"] + " got " + currentScore["score"] * -1 + " points. </p><br><br>";
 }
+
+***/
 
 /**
 async function fb_displayHighScores(scores) {
