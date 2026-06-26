@@ -15,11 +15,3 @@ async function fb_compareScores(game) {
         }
     }
 }
-
-function fb_readUserData(snapshot){
-    console.log(snapshot.val())
-    var userData = snapshot.val()
-    firebase.database().ref("database/" + currentGame + "/" + uid + "/score").set(score * -1);
-    firebase.database().ref("database/" + currentGame + "/" + uid + "/name").set(userData["name"]);
-    firebase.database().ref("database/" + currentGame + "/" + uid + "/photo").set(userData["photo"]);
-}

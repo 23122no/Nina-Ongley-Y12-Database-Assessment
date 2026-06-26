@@ -8,6 +8,7 @@ var currentGame;
 var currentLeaderboard;
 
 var usersSnapshot;
+
 async function fb_readScores(game) {
     currentGame = game;
     currentLeaderboard = document.getElementById(currentGame)
@@ -22,10 +23,14 @@ async function fb_readScores(game) {
             spaceInvaders.innerHTML = ""
         }
     }
+    console.log("reading " + game + "high scores")
     const scoresSnapshot = await firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value")
     usersSnapshot = await firebase.database().ref("database/users").once("value")
-    scoresSnapshot.forEach(fb_displayOneScore)
-    console.log("reading " + game + "high scores")
+    await scoresSnapshot.forEach(fb_displayOneScore)
+    if (spaceInvadersScoresRead == false) {
+        fb_readScores("spaceInvaders")
+    }
+
 }
 
 function fb_displayOneScore(scoreData) {
@@ -33,8 +38,8 @@ function fb_displayOneScore(scoreData) {
     var uid = scoreData.key;
     var userName = usersSnapshot.child(uid).val().name
     var profilePhoto = usersSnapshot.child(uid).val().photo
-    console.log(uid + userName + profilePhoto)
-    currentLeaderboard.innerHTML += "<p>          " + userName + " got " + scoreData.val().score * -1 + " points. </p><br><br>"; 
+    currentLeaderboard.innerHTML += "<img src='" + profilePhoto + "' width='30px' height='30px' >"
+    currentLeaderboard.innerHTML += "<p>          " + userName + " got " + scoreData.val().score * -1 + " points. </p><br><br>";
     //currentScore = scoreData.val()
     //var currentUID = scoreData.key
     //console.log(currentGame)
