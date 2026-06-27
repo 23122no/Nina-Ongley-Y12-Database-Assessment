@@ -1,17 +1,17 @@
 var currentGame;
 
-async function fb_compareScores(game) {
+async function fb_compareScores(game, recentScore) {
     currentGame = game;
-    var userScoreData = await firebase.database().ref("database/"+ game + "/" + uid).once("value")
-    var userScore = userScoreData.val()
-    if (userScore == null) {
+    var pastScoreData = await firebase.database().ref("database/"+ game + "/" + uid).once("value")
+    var pastScore = pastScoreData.val()
+    if (pastScore == null) {
         console.log("no score recorded, adding this score")
-        firebase.database().ref("database/users/" + uid).once('value', fb_readUserData, fb_error);
+        firebase.database().ref("database/" + game + "/" + uid + "/score").set(recentScore * -1);
     } else {
-        console.log(score)
-        console.log(-userScore["score"])
-        if (score > -userScore["score"]) {
-            firebase.database().ref("database/" + game + "/" + uid + "/score").set(score * -1);
+        console.log(recentScore)
+        console.log(-pastScore["score"])
+        if (recentScore > -pastScore["score"]) {
+            firebase.database().ref("database/" + game + "/" + uid + "/score").set(recentScore * -1);
         }
     }
 }
