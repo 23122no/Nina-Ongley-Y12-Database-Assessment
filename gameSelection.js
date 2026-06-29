@@ -1,5 +1,6 @@
 var userName;
 var userAge;
+var userPhoto;
 
 var spaceInvadersScoresRead = false;
 
@@ -121,10 +122,12 @@ async function fb_getUserData() {
     console.log(user)
     userName = user["name"]
     userAge = user["age"]
+    userPhoto = user["photo"]
     console.log(userName)
     fb_displayUserWelcome();
 }
 
 function fb_displayUserWelcome() {
-    welcome.innerHTML = "<h1> Welcome, " + userName + "! Here are some games:</h1>"
+    welcome.innerHTML = "<h1> Welcome, " + userName + "! Here are some games you can play:</h1>"
+    profilePhoto.innerHTML = "<img src='" + userPhoto + "'>"
 }

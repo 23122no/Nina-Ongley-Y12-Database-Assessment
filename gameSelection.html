@@ -36,24 +36,24 @@
 **************************************************************-->
 
 <body>
-  <div id="welcome"></div>
-  <div>
-    <button onclick="fb_readScores('geoDash')">View High Scores</button>
-  </div>
+  <div id="profilePhoto"></div>
+  <h1 id="welcome">Welcome! Here are some games you can play:</h1>
   <div class="container">
     <div>
       <button onclick="location.href='geoDash.html'">Play Geo Dash</button><br>
     </div>
     <div>
-      <div id="geoDash"></div>
+      <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button><br>
+      
     </div>
     <div>
-      <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button><br>
+      <div id="geoDash"></div>
     </div>
     <div>
       <div id="spaceInvaders"></div>
     </div>
   </div>
+  <script>fb_readScores("geoDash")</script>
 </body>
 
 </html>
