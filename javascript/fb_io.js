@@ -32,6 +32,7 @@ function fb_handleLogin(_user) {
     if (window.location.pathname.endsWith("/gameSelection.html")) {
       fb_getUserData();
     }
+    fb_checkUserValidity()
 
   } else {
     console.log("User is NOT logged in - Starting the popup process")
@@ -53,4 +54,17 @@ function fb_error() {
   // Error handling
   alert("An error has occured!");
   console.error(error);
+}
+
+function fb_checkUserValidity() {
+  console.log
+  firebase.database().ref("database/users/" + uid).once("value", fb_handleValidityData, fb_error)
+}
+
+function fb_handleValidityData(snapshot) {
+  if (snapshot.val() == null && 
+  (window.location.pathname.endsWith("/") == false && window.location.pathname.endsWith("userRegistration.html") == false)) {
+    console.log("not allowed to be on this page!!")
+    window.location.href = "index.html"
+  }
 }
