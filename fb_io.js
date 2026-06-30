@@ -24,9 +24,11 @@ function fb_handleLogin(_user) {
     uid = _user.uid;
     console.log("User is logged in")
     console.log(GLOBAL_user);
-    if (window.location.pathname.endsWith("/")) {
+    // If the user is on the login page, check whether they have logged in before
+    if (window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html")) {
       fb_checkUserID();
     }
+    // If the user is on the game selection page, read their data in the database
     if (window.location.pathname.endsWith("/gameSelection.html")) {
       fb_getUserData();
     }
@@ -48,7 +50,7 @@ function fb_popupLogin() {
 
 
 function fb_error() {
-  // Don't forget your error handling!
+  // Error handling
   alert("An error has occured!");
   console.error(error);
 }

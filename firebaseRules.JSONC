@@ -2,12 +2,12 @@
   // Allow anyone to read data, but only authenticated content owners can
   // make changes to their data
   "rules": {
-    ".read": false,
+    ".read": true,
     ".write": false,
     "database": {
       "users": {
         "$uid": {
-          ".read": "auth.uid === $uid",
+          ".read": true,
           ".write": "auth.uid === $uid"
         }
       },
