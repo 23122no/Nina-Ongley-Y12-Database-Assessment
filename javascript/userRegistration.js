@@ -19,7 +19,11 @@ async function fb_saveUserData() {
             window.location.href = "gameSelection.html"
 
         } else if (userAge < 16) {
+            if (userAge < 0) {
+                alert("Please enter a valid age!")
+            } else {
             alert("You are too young to use this site!")
+            }
         } else {
             fb_error();
         }
