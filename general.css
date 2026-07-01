@@ -29,18 +29,31 @@ p {
   font-size: large;
 }
 
-h1 {
-  font-size: 60px;
-}
-
-h2 {
-  font-size: 40px;
+h1, h2 {
+  font-size: 6vmin;
 }
 
 .container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto;
     place-items: center;
+}
+
+#photoContainer {
+  grid-column: 1 / span 1;
+}
+
+#welcomeContainer {
+  grid-column: 2 / span 3;
+}
+
+.leftColumn {
+  grid-column: 1 / span 2;
+}
+
+.rightColumn {
+  grid-column: 3 / span 2;
 }
 
 .container > div {

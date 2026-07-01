@@ -36,20 +36,24 @@
 **************************************************************-->
 
 <body>
-  <div id="profilePhoto"></div>
-  <h1 id="welcome">Welcome! Here are some games you can play:</h1>
+
   <div class="container">
-    <div>
+    <div id="photoContainer">
+      <div id="profilePhoto"></div>
+    </div>
+    <div id="welcomeContainer">
+      <h1 id="welcome">Welcome! Here are some games you can play:</h1>
+    </div>
+    <div class="leftColumn">
       <button onclick="location.href='geoDash.html'">Play Geo Dash</button><br>
     </div>
-    <div>
+    <div class="rightColumn">
       <button onclick="location.href='spaceInvadersIntro.html'">Play Space Invaders</button><br>
-      
     </div>
-    <div>
+    <div class="leftColumn">
       <div id="geoDash"></div>
     </div>
-    <div>
+    <div class="rightColumn">
       <div id="spaceInvaders"></div>
     </div>
   </div>
