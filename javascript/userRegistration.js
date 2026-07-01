@@ -3,22 +3,25 @@ async function fb_saveUserData() {
     userAge = document.getElementById("age").value;
     userName = document.getElementById("name").value;
 
-    if (GLOBAL_user && userAge >= 16) {
+    if (userName != "" && userAge != "") {
 
-        console.log("saving user data")
+        if (GLOBAL_user && userAge >= 16) {
 
-        await firebase.database().ref("database/users/" + uid).set({
-            "name": userName,
-            "age": Number(userAge),
-            "photo": GLOBAL_user.photoURL,
-            "email": GLOBAL_user.email
-        });
+            console.log("saving user data")
 
-        window.location.href = "gameSelection.html"
+            await firebase.database().ref("database/users/" + uid).set({
+                "name": userName,
+                "age": Number(userAge),
+                "photo": GLOBAL_user.photoURL,
+                "email": GLOBAL_user.email
+            });
 
-    } else if (userAge < 16) {
-        alert("You are too young to use this site!")
-    } else {
-        fb_error();
+            window.location.href = "gameSelection.html"
+
+        } else if (userAge < 16) {
+            alert("You are too young to use this site!")
+        } else {
+            fb_error();
+        }
     }
 }
