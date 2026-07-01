@@ -23,5 +23,7 @@ async function fb_saveUserData() {
         } else {
             fb_error();
         }
+    } else {
+        alert("Please don't leave any fields blank!")
     }
 }
