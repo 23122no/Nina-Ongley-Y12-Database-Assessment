@@ -8,6 +8,9 @@ function fb_checkUserID() {
     firebase.database().ref("database/users/" + uid).once("value", fb_checkUserPresence, fb_error)
 }
 
+/*****************************************************/
+// fb_checkUserPresence()
+/*****************************************************/
 function fb_checkUserPresence(currentUser) {
     console.log(currentUser.val())
     // If there is no data for the current user, 

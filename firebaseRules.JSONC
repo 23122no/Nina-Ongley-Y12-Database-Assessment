@@ -1,25 +1,25 @@
 {
-  // Allow anyone to read data, but only authenticated content owners can
+  // Allow authenticated users to read data, but only authenticated content owners can
   // make changes to their data
   "rules": {
-    ".read": true,
+    ".read": "auth.uid !== null",
     ".write": false,
     "database": {
       "users": {
         "$uid": {
-          ".read": true,
+          ".read": "auth.uid !== null",
           ".write": "auth.uid === $uid"
         }
       },
       "spaceInvaders": {
         "$uid": {
-          ".read": true,
+          ".read": "auth.uid !== null",
           ".write": "auth.uid === $uid"
         }
       },
       "geoDash": {
         "$uid": {
-          ".read": true,
+          ".read": "auth.uid !== null",
           ".write": "auth.uid === $uid"
         }
       }
