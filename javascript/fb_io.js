@@ -1,19 +1,14 @@
-/**************************************************************
- **************************************************************
- **                                                          **
- ** fb_io.js is where you will put common firebase functions **
- ** used throughout your code.                               **
- **                                                          **
- **************************************************************
- **************************************************************/
+/*****************************************************/
+// fb_io.js
+// Written Term 2 2026
+/*****************************************************/
 
+// Declare variables
 var GLOBAL_user;  // Google's user object
 var uid;
 
-
 function fb_authenticate() {
   // authenticate with Google
-  console.log("fb_authenticate running")
   authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
 }
 
@@ -23,7 +18,6 @@ function fb_handleLogin(_user) {
     GLOBAL_user = _user; // Save the user object to a global variable
     uid = _user.uid;
     console.log("User is logged in")
-    console.log(GLOBAL_user);
     // If the user is on the login page, check whether they have logged in before
     if (window.location.pathname.endsWith("/") || window.location.pathname.endsWith("index.html")) {
       fb_checkUserID();
@@ -56,15 +50,23 @@ function fb_error() {
   console.error(error);
 }
 
+/*****************************************************/
+// fb_checkUserValidity
+// Reads the current user's data
+/*****************************************************/
 function fb_checkUserValidity() {
-  console.log
+  // Read the data of the current user and run rb_handleValidityData()
   firebase.database().ref("database/users/" + uid).once("value", fb_handleValidityData, fb_error)
 }
 
+/*****************************************************/
+// fb_handleValidityData()
+// Check if the user is registered
+// If they aren't, take them to the login page
+/*****************************************************/
 function fb_handleValidityData(snapshot) {
   if (snapshot.val() == null && 
   (window.location.pathname.endsWith("/") == false && window.location.pathname.endsWith("userRegistration.html") == false)) {
-    console.log("not allowed to be on this page!!")
     window.location.href = "index.html"
   }
 }

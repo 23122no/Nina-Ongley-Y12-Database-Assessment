@@ -1,7 +1,12 @@
-var spaceInvadersScoresRead = false;
+/*****************************************************/
+// gameSelection.js
+// Written Term 2 2026
+/*****************************************************/
+
+// Declare global variables
 
 var currentLeaderboard;
-
+var spaceInvadersScoresRead = false;
 var usersSnapshot;
 
 var userName;
@@ -10,10 +15,10 @@ var userPhoto;
 
 /*****************************************************/
 // fb_readScores()
+// Reads the score data and user data from the database
 /*****************************************************/
 async function fb_readScores(game) {
     currentLeaderboard = document.getElementById(game)
-    console.log("fb_readScores , game = " + game)
     // If the Space Invaders scores are being read, update them being read to true and display a heading
     if (game == "spaceInvaders") {
         spaceInvadersScoresRead = true;
@@ -24,7 +29,6 @@ async function fb_readScores(game) {
             currentLeaderboard.innerHTML = "<h2>Geo Dash High Scores</h2>"
         }
     }
-    console.log("reading " + game + "high scores")
     // Read the database for the three highest scores
     const scoresSnapshot = await firebase.database().ref("database/" + game).orderByChild("score").limitToFirst(3).once("value")
     // Read the database for all of the user data
@@ -41,9 +45,10 @@ async function fb_readScores(game) {
 
 /*****************************************************/
 // fb_displayOneScore()
+// Updates html to display each score with user's name,
+// profile photo, and score 
 /*****************************************************/
 function fb_displayOneScore(scoreData) {
-    console.log("running fb_displayOneScore")
     // Store the uid of the current score's key
     var uid = scoreData.key;
     // Read the object containing all user data for the data of the current score's uid
@@ -56,9 +61,9 @@ function fb_displayOneScore(scoreData) {
 
 /*****************************************************/
 // fb_getUserData()
+// Read the data of the current user
 /*****************************************************/
 async function fb_getUserData() {
-    console.log(uid)
     // Read the user's stored data
     var userData = await firebase.database().ref("database/users/" + uid).once("value")
     var user = userData.val()
@@ -71,6 +76,8 @@ async function fb_getUserData() {
 
 /*****************************************************/
 // fb_displayUserWelcome()
+// Uppdate the html to welcome the user with name and
+// profile photo
 /*****************************************************/
 function fb_displayUserWelcome() {
     // Update the html to welcome the user with their profile photo and name
